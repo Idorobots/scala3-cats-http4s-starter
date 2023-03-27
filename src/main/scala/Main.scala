@@ -1,5 +1,15 @@
-@main def hello: Unit =
-  println("Hello world!")
-  println(msg)
+import cats.effect._
+import org.http4s.implicits._
+import org.http4s.blaze.server.BlazeServerBuilder
 
-def msg = "I was compiled by Scala 3. :)"
+object Main extends IOApp {
+
+  override def run(args: List[String]): IO[ExitCode] = BlazeServerBuilder[IO]
+    .bindHttp(8080, "localhost")
+    .withHttpApp(Server.routes.orNotFound)
+    .serve
+    .compile
+    .drain
+    .as(ExitCode.Success)
+
+}
