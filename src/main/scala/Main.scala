@@ -1,8 +1,8 @@
-import cats.effect._
-import org.http4s.implicits._
+import cats.effect.*
+import org.http4s.implicits.*
 import org.http4s.blaze.server.BlazeServerBuilder
 
-object Main extends IOApp {
+object Main extends IOApp:
 
   override def run(args: List[String]): IO[ExitCode] = BlazeServerBuilder[IO]
     .bindHttp(8080, "localhost")
@@ -11,5 +11,3 @@ object Main extends IOApp {
     .compile
     .drain
     .as(ExitCode.Success)
-
-}

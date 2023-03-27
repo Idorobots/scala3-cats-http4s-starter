@@ -1,12 +1,11 @@
-import cats.effect._
-import org.http4s._
-import org.http4s.dsl.io._
-import org.http4s.implicits._
+import cats.effect.*
+import org.http4s.*
+import org.http4s.dsl.io.*
+import org.http4s.implicits.*
 
-object Server {
+object Server:
 
   val routes = HttpRoutes.of[IO] {
 
     case _ => Ok("Hello World")
   }
-}
