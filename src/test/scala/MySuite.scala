@@ -6,7 +6,7 @@ import org.http4s.implicits._
 
 class MySuite extends munit.CatsEffectSuite {
   test("Server responds to pings") {
-    val request = Request[IO](Method.GET, uri"/")
+    val request = Request[IO](Method.GET, uri"/ping")
 
     Server.routes.orNotFound.run(request).flatMap { response =>
       assertEquals(response.status, Status.Ok)

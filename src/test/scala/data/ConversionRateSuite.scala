@@ -12,7 +12,7 @@ import ConversionRate.given
 class ConversionRateSuite extends munit.FunSuite {
 
   test("ConversionRate should correctly validate fields") {
-    ConversionRate.createConversionRate("XYZ", "EUR", -0.5) match {
+    ConversionRate.create("XYZ", "EUR", -0.5) match {
       case Invalid(errors) =>
         assert(errors.toList.contains("Invalid currency code: XYZ"))
         assert(errors.toList.contains("Rate should not be negative"))

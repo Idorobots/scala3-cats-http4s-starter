@@ -13,7 +13,7 @@ object ConversionRate {
   def validateCurrency(currency: String): ValidatedNec[String, String] =
     Validated.condNec(Set("USD", "EUR", "PLN", "XAU").contains(currency), currency, s"Invalid currency code: $currency")
 
-  def createConversionRate(sourceCurrency: String, destinationCurrency: String, rate: Double): ValidatedNec[String, ConversionRate] = (
+  def create(sourceCurrency: String, destinationCurrency: String, rate: Double): ValidatedNec[String, ConversionRate] = (
     validateCurrency(sourceCurrency),
     validateCurrency(destinationCurrency),
     validateRate(rate),
@@ -21,5 +21,5 @@ object ConversionRate {
 
   inline given Encoder[ConversionRate] = deriveEncoder
   inline given Decoder[ValidatedNec[String, ConversionRate]] =
-    Decoder.forProduct3("sourceCurrency", "destinationCurrency", "rate")(createConversionRate)
+    Decoder.forProduct3("sourceCurrency", "destinationCurrency", "rate")(create)
 }
