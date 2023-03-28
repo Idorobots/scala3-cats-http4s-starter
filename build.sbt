@@ -1,7 +1,6 @@
 val scala3Version = "3.2.2"
 val http4sVersion = "0.23.14"
 val circeVersion = "0.14.5"
-val ironVersion = "2.0.0"
 
 lazy val root = project
   .in(file("."))
@@ -21,11 +20,6 @@ lazy val root = project
       // JSON
       "io.circe" %% "circe-core" % circeVersion,
       "io.circe" %% "circe-generic" % circeVersion,
-
-      // Type constraints
-      "io.github.iltotore" %% "iron" % ironVersion,
-      "io.github.iltotore" %% "iron-cats" % ironVersion,
-      "io.github.iltotore" %% "iron-circe" % ironVersion,
     ),
 
     libraryDependencies ++= Seq(
