@@ -20,6 +20,9 @@ jobs:
         distribution: zulu
         java-version: 17
 
+    - name: Enable Coursier cache
+      uses: coursier/cache-action@v6
+
     - name: Install Coursier & SBT
       uses: coursier/setup-action@v1
 
