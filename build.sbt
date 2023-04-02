@@ -20,6 +20,10 @@ lazy val root = project
       // JSON
       "io.circe" %% "circe-core" % circeVersion,
       "io.circe" %% "circe-generic" % circeVersion,
+      "io.circe" %% "circe-config" % "0.10.0",
+
+      // Config
+      "com.typesafe" % "config" % "1.4.2",
     ),
 
     libraryDependencies ++= Seq(
