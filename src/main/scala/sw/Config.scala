@@ -6,9 +6,13 @@ import io.circe.config.syntax.*
 
 case class Rest(host: String, port: Int)
 
+case class FreeCurrencyApi(apiKey: String)
+
+case class Config(rest: Rest, freeCurrencyApi: FreeCurrencyApi)
+
 object Config:
 
   private val config = ConfigFactory.load()
 
-  val Rest = config.as[Rest]("sw.rest")
+  val all = config.as[Config]("sw")
 
