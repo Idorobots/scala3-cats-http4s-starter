@@ -8,7 +8,7 @@ import io.circe.generic.semiauto.*
 
 case class ConversionRate(sourceCurrency: String, destinationCurrency: String, rate: Double)
 
-object ConversionRate {
+object ConversionRate:
   def validateRate(rate: Double): ValidatedNec[String, Double] =
     Validated.condNec(rate >= 0, rate, "Rate should not be negative")
 
@@ -24,4 +24,3 @@ object ConversionRate {
   inline given Encoder[ConversionRate] = deriveEncoder
   inline given Decoder[ValidatedNec[String, ConversionRate]] =
     Decoder.forProduct3("sourceCurrency", "destinationCurrency", "rate")(create)
-}
