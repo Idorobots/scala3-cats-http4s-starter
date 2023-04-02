@@ -1,0 +1,39 @@
+name: CI/CD
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: 17
+
+    - name: Install SBT
+      run: sudo apt-get install -y sbt
+
+    - name: Build and Test
+      run: sbt coverage test coverageReport
+
+    - name: Save Coverage Report as Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: coverage-report
+        path: target/scala-3.2.2/scoverage-report/
+
+    - name: Upload Test Results to GitHub
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+        path: target/test-reports/
+
