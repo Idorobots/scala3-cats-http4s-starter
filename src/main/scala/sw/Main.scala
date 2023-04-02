@@ -1,3 +1,5 @@
+package sw
+
 import cats.effect.*
 import org.http4s.implicits.*
 import org.http4s.blaze.server.BlazeServerBuilder

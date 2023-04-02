@@ -1,3 +1,5 @@
+package sw.domain
+
 import cats.data.*
 import cats.data.Validated.{Invalid, Valid}
 import cats.implicits.*
@@ -7,7 +9,8 @@ import io.circe.jawn.*
 import io.circe.syntax.*
 import io.circe.generic.semiauto.*
 
-import ConversionRate.given
+import sw.domain.ConversionRate
+import sw.domain.ConversionRate.given
 
 class ConversionRateSuite extends munit.FunSuite {
 

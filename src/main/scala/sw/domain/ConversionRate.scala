@@ -1,3 +1,5 @@
+package sw.domain
+
 import cats.data.*
 import cats.implicits.*
 import cats.syntax.apply.*
