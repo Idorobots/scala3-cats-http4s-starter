@@ -3,7 +3,7 @@ val http4sVersion = "0.23.14"
 val circeVersion = "0.14.5"
 
 lazy val root = project
-  .enablePlugins(DockerPlugin, JavaServerAppPackaging)
+  .enablePlugins(GraalVMNativeImagePlugin, DockerPlugin, JavaServerAppPackaging)
   .in(file("."))
   .settings(
     name := "Scala3 Cats http4s starter",
@@ -33,11 +33,16 @@ lazy val root = project
       "org.typelevel" %% "munit-cats-effect-3" % "1.0.7" % Test,
     ),
 
-    // Docker packaging.
+    // Docker packaging:
     Docker / packageName := packageName.value,
     Docker / version := version.value,
     dockerBaseImage := "openjdk:17",
     dockerExposedPorts ++= Seq(8080),
+
+    // GraalVM packaging:
+    assembly / mainClass := Some("sw.Main"),
+    assembly / assemblyJarName := s"${packageName.value}_3-${version.value}.jar",
+    graalVMNativeImageGraalVersion := Some("22.3.1"),
 
     scalacOptions ++= Seq(
       "-feature", "-unchecked", "-deprecation", "-encoding", "utf8",
