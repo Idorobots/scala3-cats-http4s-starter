@@ -3,6 +3,7 @@ val http4sVersion = "0.23.14"
 val circeVersion = "0.14.5"
 
 lazy val root = project
+  .enablePlugins(DockerPlugin, JavaServerAppPackaging)
   .in(file("."))
   .settings(
     name := "Scala3 Cats http4s starter",
@@ -32,9 +33,11 @@ lazy val root = project
       "org.typelevel" %% "munit-cats-effect-3" % "1.0.7" % Test,
     ),
 
-    semanticdbEnabled := true,
-
-    coverageEnabled := true,
+    // Docker packaging.
+    Docker / packageName := packageName.value,
+    Docker / version := version.value,
+    dockerBaseImage := "openjdk:17",
+    dockerExposedPorts ++= Seq(8080),
 
     scalacOptions ++= Seq(
       "-feature", "-unchecked", "-deprecation", "-encoding", "utf8",
