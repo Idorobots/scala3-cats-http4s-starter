@@ -3,7 +3,7 @@
 PACKAGE=scala3-cats-http4s-starter_3
 VERSION=0.1.0-SNAPSHOT
 SCALA_VERSION=3.2.2
-export META_INF_DIR=./src/main/resources/META-INF/native-image
+META_INF_DIR=./src/main/resources/META-INF/native-image
 
 echo "Make sure to run `sbt assembly` first."
 echo "Once started, make some use of the app for a while, and then close it."

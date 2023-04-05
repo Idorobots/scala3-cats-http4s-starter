@@ -7,5 +7,8 @@ The only thing it does is defining an API endpoint that translates from https://
 
 ### Usage
 
-This is a normal sbt project. You can compile code with `sbt compile`, run it with `sbt run`, and `sbt console` will start a Scala 3 REPL. There's also `sbt scalafmt`, `sbt scalafixAll` and `sbt coverage test coverageReport` available.
+This is a normal sbt project. You can compile code with `sbt compile`, run it with `sbt run`, and `sbt console` will start a Scala 3 REPL.
 
+Packaging is done via `sbt Docker/publishLocal` or, to build a native image for GraalVM, `sbt GraalVMNativeImage/packageBin`.
+
+There's also `sbt scalafmt`, `sbt scalafixAll` and `sbt coverage test coverageReport` available.
