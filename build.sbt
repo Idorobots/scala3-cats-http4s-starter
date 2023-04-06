@@ -44,6 +44,17 @@ lazy val root = project
     assembly / assemblyJarName := s"${packageName.value}_3-${version.value}.jar",
     graalVMNativeImageGraalVersion := Some("22.3.1"),
 
+    graalVMNativeImageOptions ++= Seq(
+      "--no-fallback",
+      "--static",
+      "--allow-incomplete-classpath",
+      "--report-unsupported-elements-at-runtime",
+      "--enable-https",
+      "--enable-http",
+      "--enable-all-security-services",
+      "-H:+ReportExceptionStackTraces",
+    ),
+
     scalacOptions ++= Seq(
       "-feature", "-unchecked", "-deprecation", "-encoding", "utf8",
       "-Xfatal-warnings"
