@@ -9,6 +9,6 @@ The only thing it does is defining an API endpoint that translates from https://
 
 This is a normal sbt project. You can compile code with `sbt compile`, run it with `sbt run`, and `sbt console` will start a Scala 3 REPL.
 
-Packaging is done via `sbt Docker/publishLocal` or, to build a native image for GraalVM, `sbt GraalVMNativeImage/packageBin`.
+Packaging is done via `sbt Docker/publishLocal` or, to build a native image for GraalVM, `sbt GraalVMNativeImage/packageBin`.Before generating a native image, you should run the app in tracing mode: `sbt runTraced`.
 
 There's also `sbt scalafmt`, `sbt scalafixAll` and `sbt coverage test coverageReport` available.
