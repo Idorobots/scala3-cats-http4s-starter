@@ -7,19 +7,18 @@ import org.http4s.blaze.client.BlazeClientBuilder
 
 import sw.service.*
 
-object Main extends IOApp:
+object Main extends ResourceApp.Forever:
 
-  override def run(args: List[String]): IO[ExitCode] =
+  override def run(args: List[String]): Resource[IO, Unit] =
     for
-      config <- IO.fromEither(Config.all)
-      server <- BlazeClientBuilder[IO].resource.use { client =>
-        val service = FreeCurrencyApi(client, config.freeCurrencyApi.apiKey)
-        BlazeServerBuilder[IO]
+      config <- Config.load()
+      client <- BlazeClientBuilder[IO].resource
+
+      service = FreeCurrencyApi(client, config.freeCurrencyApi.apiKey)
+      routes = Server.routes(service).orNotFound
+
+      _ <- BlazeServerBuilder[IO]
           .bindHttp(config.rest.port, config.rest.host)
-          .withHttpApp(Server.routes(service).orNotFound)
-          .serve
-          .compile
-          .drain
-          .as(ExitCode.Success)
-      }
-    yield server
+          .withHttpApp(routes)
+          .resource
+    yield ()
